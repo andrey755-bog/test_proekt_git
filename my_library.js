@@ -32,6 +32,11 @@ class Library {
         }
         return newBook;
     }
+
+    //Поиск книг 
+    findBook(searchTerm) {
+        return this.books.filter(book => book.title.includes(searchTerm))
+    }
 }
 const library = new Library("Тестовая библиотека");
 
@@ -41,3 +46,7 @@ library.addBook("React продвинутый", "Мария Сидорова", 2
 library.addBook("Benzo", "Big Baby Tape", 2017, "REACT-042", 2);
 library.addBook("Дежавю. Богемский рэп, сода и я.", "Олег Викторович Нечипоренко(Kizaru)", 2022, "REACT-052", 1);
 console.log(library.books);
+
+//Ищем книги
+const foundBooks = library.findBook("JavaScript");
+console.log(foundBooks.length); // Должно вернуть 1
