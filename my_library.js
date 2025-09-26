@@ -35,7 +35,18 @@ class Library {
 
     //Поиск книг 
     findBook(searchTerm) {
-        return this.books.filter(book => book.title.includes(searchTerm))
+        let foundBooks = this.books.filter(book => book.title.includes(searchTerm))
+        if (foundBooks.length) {
+            return foundBooks;
+        } else {
+            foundBooks = this.books.filter(book => book.author.includes(searchTerm));
+        if (foundBooks.length) {
+            return foundBooks;
+        } else {
+            foundBooks = this.books.filter(book => book.isnb == searchTerm);
+            return foundBooks
+        }
+        }
     }
 }
 const library = new Library("Тестовая библиотека");
@@ -48,5 +59,5 @@ library.addBook("Дежавю. Богемский рэп, сода и я.", "О�
 console.log(library.books);
 
 //Ищем книги
-const foundBooks = library.findBook("JavaScript");
+const foundBooks = library.findBook("В");
 console.log(foundBooks.length); // Должно вернуть 1
