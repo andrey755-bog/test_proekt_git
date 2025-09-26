@@ -48,6 +48,19 @@ class Library {
         }
         }
     }
+
+
+    getBookStats() {
+    const totalQuantity = this.books.reduce((accum, val) => accum + val.totalQuantity,0);
+    const availableQuantity = this.books.reduce((accum, val) => accum + val.availableQuantity, 0);
+    const statistic = {
+        totalQuantity: totalQuantity,
+        availableQuantity: availableQuantity,
+        issued: totalQuantity - availableQuantity,
+        mostPopularBooks: this.books.sort((a, b) => b.borrowedBy.length - a.borrowedBy.length).slice(0, 2)
+    }    
+        return statistic;
+    }
 }
 const library = new Library("Тестовая библиотека");
 
@@ -59,5 +72,6 @@ library.addBook("Дежавю. Богемский рэп, сода и я.", "О�
 console.log(library.books);
 
 //Ищем книги
-const foundBooks = library.findBook("В");
+const foundBooks = library.findBook("Дежавю. Богемский рэп, сода и я.");
 console.log(foundBooks.length); // Должно вернуть 1
+console.log(library.getBookStats());
